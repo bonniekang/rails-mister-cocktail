@@ -8,10 +8,28 @@
 require 'open-uri'
 require 'json'
 
+puts "Destroy ingredients"
+Ingredient.destroy_all if Rails.env.development?
+
+puts "Destroy Cocktails"
+Cocktail.destroy_all if Rails.env.development?
+
+
+puts "Create ingredients"
 uri = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
 result = JSON.load(open(uri))
 drinks = result["drinks"]
 
 drinks.each do |d|
-  Ingredient.create( name: d["strIngredient1"] )
+  i = Ingredient.create( name: d["strIngredient1"] )
+  puts "create #{i.name}"
+end
+
+margarita = { name: "Margarita"}
+martini = { name: "Dry Martini"}
+manhattan = { name: "Manhattan" }
+
+[margarita, martini, manhattan].each do |c|
+  cocktail = Cocktail.create!(c)
+  puts "created #{cocktail.name}"
 end

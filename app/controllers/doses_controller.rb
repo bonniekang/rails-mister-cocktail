@@ -15,7 +15,7 @@ class DosesController < ApplicationController
     @dose.cocktail = @cocktail
 
     if @dose.save
-      redirect_to
+      redirect_to cocktail_path(@cocktail)
     else
       render :new
     end
@@ -24,12 +24,16 @@ class DosesController < ApplicationController
   def destroy
     # A user can delete a dose that belongs to an existing cocktail.
     # DELETE "doses/25"
+    @dose = Dose.find(params[:id])
+    @dose.destroy
+    redirect_to cocktail_doses_path(@dose.cocktail)
   end
 
   private
 
   def dose_params
-    params.require(:dose).permit()
+
+    params.require(:dose).permit(:ingredient_id, :description)
     # ingredient/description pair
   end
 end
