@@ -1,10 +1,37 @@
-<h1><%= @cocktail.name %></h1>
-<%= link_to "Back", cocktails_path %>
+<div class="container p-5">
+<div class="row align-items-center justify-content-between">
+  <h1 class="col-sm-md-lg"><%= link_to "Cocktails", cocktails_path%></h1>
+  <h1 class="col-sm-md-lg"> <%= link_to "New cocktail", new_cocktail_path%></h1>
+</div>
+</div>
 
+  <% if @cocktail.photo.attached? %>
+    <% url =  cl_image_tag cocktail.photo, height: 600, width: 400, crop: :fill%>
+  <% else %>
+    <% url = "https://images.unsplash.com/photo-1517620430776-0ec904756579?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" %>
+  <% end %>
+  <div class="banner" style="background-image:url('<%= url %>');">
+<h1><%= @cocktail.name %></h1>
+</div>
+<div class="container d-flex justify-content-center">
+<div class="ingredient-card m-5">
+  <h3 class= "p-2">Ingredient</h3>
 <% @cocktail.doses.each do |dose| %>
+  <div>
   <%= dose.ingredient.name %>
   <%= dose.description %>
-  <%= link_to "Delete", dose_path(dose), method: :delete, data: {confirm: "Delete"} %>
+  <%= link_to "X", dose_path(dose), method: :delete, data: {confirm: "Delete"} %>
+  </div>
 <% end %>
-
+</div>
+</div>
+<div class="container">
+  <div class="row align-items-center justify-content-between">
+<div class="col btn show">
+<%= link_to "Back", cocktails_path %>
+</div>
+<div class="col btn show">
 <%= link_to "Add an ingredient",  new_cocktail_dose_path(@cocktail) %>
+</div>
+</div>
+</div>

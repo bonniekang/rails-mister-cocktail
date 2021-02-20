@@ -1,7 +1,26 @@
-<h1>Cocktails</h1>
-<ul>
+<div class="container p-5">
+<div class="row align-items-center justify-content-between">
+  <h1 class="col-sm-md-lg"><%= link_to "Cocktails", cocktails_path%></h1>
+  <h1 class="col-sm-md-lg"> <%= link_to "New cocktail", new_cocktail_path%></h1>
+</div>
+</div>
+
+
+<div class="main-container">
+  <div class="tiles-container">
+
   <% @cocktails.each do |cocktail| %>
-    <li> <%= cocktail.name %> <%= link_to 'more', cocktail_path(cocktail) %></li>
+  <div class="tiles">
+  <% if cocktail.photo.attached? %>
+    <% url =  cl_image_tag cocktail.photo, height: 600, width: 400, crop: :fill%>
+  <% else %>
+    <% url = "https://images.unsplash.com/photo-1517620430776-0ec904756579?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" %>
   <% end %>
-</ul>
-<%= link_to "Add a new cocktail", new_cocktail_path %>
+    <div class="image-container" style="background-image:url('<%= url %>');"><%= link_to "#{cocktail.name}", cocktail_path(cocktail) %></div>
+  </div>
+  <% end %>
+
+</div>
+</div>
+
+
