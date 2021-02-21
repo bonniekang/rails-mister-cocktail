@@ -8,7 +8,6 @@
 
 <div class="main-container">
   <div class="tiles-container">
-
   <% @cocktails.each do |cocktail| %>
   <% if cocktail.photo.attached? %>
     <% url =  cl_image_path cocktail.photo.key, height: 600, width: 400, crop: :fill %>
@@ -19,7 +18,6 @@
     <div class="image-container" style="background-image:url('<%= url %>');"><%= link_to "#{cocktail.name}", cocktail_path(cocktail) %></div>
   </div>
   <% end %>
-
 </div>
 </div>
 
