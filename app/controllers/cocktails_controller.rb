@@ -28,11 +28,7 @@ class CocktailsController < ApplicationController
   def update
     @cocktail = Cocktail.find(params[:id])
     @cocktail = Cocktail.update(cocktail_params)
-    if @cocktail.save
-      redirect_to cocktails_path
-    else
-      render :edit
-    end
+    redirect_to cocktails_path
   end
 
   private
