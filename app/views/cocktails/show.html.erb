@@ -32,6 +32,9 @@
 <%= link_to "Back", cocktails_path %>
 </div>
 <div class="col btn show">
+<%= link_to "Edit", edit_cocktail_path(@cocktail) %>
+</div>
+<div class="col btn show">
 <%= link_to "Add an ingredient",  new_cocktail_dose_path(@cocktail) %>
 </div>
 </div>
